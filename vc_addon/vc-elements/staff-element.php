@@ -20,6 +20,11 @@ class vcInfoBox extends WPBakeryShortCode {
                 return;
         }
              
+        $categories_array = array();
+       $categories = get_terms('cws-staff-dept');
+       foreach( $categories as $category ){
+          $categories_array[$category->name] =  $category->term_id;
+        }
         // Map the block with vc_map()
         vc_map( 
       
@@ -41,21 +46,19 @@ class vcInfoBox extends WPBakeryShortCode {
                         'description' => __( 'Box Title', 'text-domain' ),
                         'admin_label' => false,
                         'weight' => 0,
-                        'group' => 'Custom Group',
                     ),  
-                      
+                       
                     array(
-                        'type' => 'textarea',
-                        'holder' => 'div',
-                        'class' => 'text-class',
-                        'heading' => __( 'Text', 'text-domain' ),
-                        'param_name' => 'text',
-                        'value' => __( 'Default value', 'text-domain' ),
-                        'description' => __( 'Box Text', 'text-domain' ),
-                        'admin_label' => false,
-                        'weight' => 0,
-                        'group' => 'Custom Group',
-                    )                   
+                      "type" => "checkbox",
+                      "class" => "",
+                      "heading" => __( "Département à afficher", "my-text-domain" ),
+                      "param_name" => "miaou",
+                      "value"       => $categories_array,
+                      "description" => __( ".", "my-text-domain" ),
+
+                    ),
+
+                        
                          
                 )
             )
@@ -73,7 +76,7 @@ class vcInfoBox extends WPBakeryShortCode {
             shortcode_atts(
                 array(
                     'title'   => '',
-                    'text' => '',
+                    'miaou' => '',
                 ), 
                 $atts
             )
@@ -92,8 +95,15 @@ class vcInfoBox extends WPBakeryShortCode {
 */
          $args = array('post_type' => 'staff',
                         'post_status' => 'publish',
-                        'ignore_sticky_posts' => false);
-
+                        'ignore_sticky_posts' => false, 
+                        'tax_query' => array(
+                    array(
+                        'taxonomy' => 'cws-staff-dept',
+                        'field'    => 'term_id',
+                        'terms'    => array( $miaou ),
+                    ),
+                ),
+        );
         $r = new WP_Query($args);
         // Fill $html var with data
 
@@ -116,6 +126,7 @@ class vcInfoBox extends WPBakeryShortCode {
                     $r->the_post();
                     $curr_post = $r->posts[$r->current_post];
                     $cws_stored_meta = get_post_meta( $curr_post->ID, 'cws-staff');
+                    $html .=  var_dump(wp_get_post_terms( get_the_ID(), 'cws-staff-dept')) ;
                     $occupation = $cws_stored_meta[0]['cws-staff-degree'];
 
                     $thumbnail = has_post_thumbnail( $post->ID ) ? wp_get_attachment_image_src(get_post_thumbnail_id( $post->ID )) : null;
