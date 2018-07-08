@@ -41,7 +41,7 @@ function cws_custom_type_register() {
 
 	// Portfolio
 
-	$labels = array(
+	/*$labels = array(
 		'name' => __('Portfolio Items', THEME_SLUG),
 		'singular_name' => __('Portfolio Item', THEME_SLUG),
 		'add_new' => __('Add Portfolio Item', THEME_SLUG),
@@ -76,7 +76,7 @@ function cws_custom_type_register() {
 		'taxonomies' => array('cws-portfolio-type', 'post_tag')
 	);
 
-	register_post_type('portfolio', $args);
+	register_post_type('portfolio', $args);*/
 
 	cws_portfolio_register_taxonomies();
 }
@@ -126,7 +126,7 @@ function cws_portfolio_register_taxonomies() {
 			)
 		);
 
-	register_taxonomy('cws-staff-procedures', 'staff',
+	/*register_taxonomy('cws-staff-procedures', 'staff',
 		array(
 			'hierarchical' => true,
 			'show_admin_column' => false,
@@ -191,7 +191,7 @@ function cws_portfolio_register_taxonomies() {
 			'query_var' => true,
 			'rewrite' => array('slug' => 'portfolio-type')
 			)
-		);
+		);*/
 }
 
 /* Department metaboxes */
@@ -210,6 +210,7 @@ function dept_metabox_add($tag) {
 	<input class="widefat" hidden readonly id="dept-img" name="cws-clinico-dept-img" type="text" value="" />
 	<img id="img-dept-img" src />
 	</div>
+<!-- 
 	<div class="form-field">
 	<label for="cws-clinico-dept-procedures"><?php _e('Select procedures available for this Department', THEME_SLUG)?></label>
 	<select multiple name="cws-clinico-dept-procedures[]" id="cws-clinico-dept-procedures" class="postform" style="width:100%">
@@ -218,6 +219,8 @@ function dept_metabox_add($tag) {
 	?>
 	</select>
 	</div>
+	 -->
+
 	<div class="form-field">
 	<label for="cws-clinico-events"><?php _e('Events associated with this Department', THEME_SLUG)?></label>
 	<select multiple name="cws-clinico-events[]" id="cws-clinico-events" class="postform" style="width:100%">
@@ -640,12 +643,12 @@ function cws_mb_staff_callback ( $post ) {
 			'options'=>array(
 				array(
 					'id' => 'degree',
-					'title' => __('Doctor\'s degree (optional)',THEME_SLUG),
+					'title' => __('Poste occupé',THEME_SLUG),
 					'type' => 'text',
 					'default' => $degree,
 					'w' => '100%'
 				),
-				array(
+/*				array(
 					'id' => 'office',
 					'title' => __('Office address',THEME_SLUG),
 					'type' => 'text',
@@ -661,7 +664,7 @@ function cws_mb_staff_callback ( $post ) {
 					'source' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
 					'default' => $workingdays,
 					'w' => '100%'
-				),
+				),*/
 			)
 		),
 	);
@@ -669,14 +672,14 @@ function cws_mb_staff_callback ( $post ) {
 	echo '<section id="post-staff-general" class="cws-page-section">';
 	echo cws_shortcode_html_gen($post_mb_staff_attr, 'staff', 0, false, false, 'staff');
 	echo '</section>';
-	echo '<section class="cws-page-section">';
+	/*echo '<section class="cws-page-section">';
 	echo cws_shortcode_html_gen($post_tel_attr, 'telephone', 0, false, false, 'tel');
 	echo '</section>';
 	for ($i=0;$i < 5; $i++) {
 		echo '<section id="post-staff-' . $i . '" class="cws-page-section">';
 		echo cws_shortcode_html_gen($post_mbhtml_attr, 'social', isset($cws_stored_meta['social'][$i]) ? $cws_stored_meta['social'][$i] : '', $i, false);
 		echo '</section>';
-	}
+	}*/
 
 		?>
 		<script>cws_shortcode_init();</script>

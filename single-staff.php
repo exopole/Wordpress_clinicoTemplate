@@ -69,13 +69,13 @@
 
 
 								$staff_info = array(
-									__('departments', THEME_SLUG ) => wp_get_post_terms( get_the_ID(), 'cws-staff-dept'),
-									__('positions', THEME_SLUG ) => wp_get_post_terms( get_the_ID(), 'cws-staff-position'),
+									__('Disponible au ', THEME_SLUG ) => wp_get_post_terms( get_the_ID(), 'cws-staff-dept'),
+									/*__('positions', THEME_SLUG ) => wp_get_post_terms( get_the_ID(), 'cws-staff-position'),
 									__('treatments', THEME_SLUG ) => wp_get_post_terms( get_the_ID(), 'cws-staff-treatments'),
-									__('procedures', THEME_SLUG ) => wp_get_post_terms( get_the_ID(), 'cws-staff-procedures'),
-									__('degree', THEME_SLUG ) => isset( $cws_stored_meta['cws-staff-degree'] ) ? esc_attr( $cws_stored_meta['cws-staff-degree'] ) : '',
-									__('office', THEME_SLUG ) => isset( $cws_stored_meta['cws-staff-office'] ) ? esc_attr( $cws_stored_meta['cws-staff-office'] ) : '',
-									__('workingdays', THEME_SLUG ) => isset( $cws_stored_meta['cws-staff-workingdays'] ) ? $cws_stored_meta['cws-staff-workingdays'] : array()
+									__('procedures', THEME_SLUG ) => wp_get_post_terms( get_the_ID(), 'cws-staff-procedures'),*/
+									__('Occupation', THEME_SLUG ) => isset( $cws_stored_meta['cws-staff-degree'] ) ? esc_attr( $cws_stored_meta['cws-staff-degree'] ) : '',
+									/*__('office', THEME_SLUG ) => isset( $cws_stored_meta['cws-staff-office'] ) ? esc_attr( $cws_stored_meta['cws-staff-office'] ) : '',
+									__('workingdays', THEME_SLUG ) => isset( $cws_stored_meta['cws-staff-workingdays'] ) ? $cws_stored_meta['cws-staff-workingdays'] : array()*/
 								);
 								echo "<section class='cats_group'>";
 									$dow = array( __("Sunday",THEME_SLUG) , __("Monday",THEME_SLUG), __("Tuesday", THEME_SLUG), __("Wednesday", THEME_SLUG), __("Thursday", THEME_SLUG), __("Friday", THEME_SLUG), __("Saturday", THEME_SLUG) );
