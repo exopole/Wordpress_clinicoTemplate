@@ -111,42 +111,52 @@ class vcInfoBox extends WPBakeryShortCode {
 
         $style_title = "font-weight: bold;font-size: large;";
         $style_subtitle = "font-style: italic;";
-            
-
+        $arrayValue = array();
         if ($r->have_posts()){ 
             $html .= "<div>";
             if ($r->have_posts()){
                 $i = 0;
                 while ($r->have_posts()):
-                    
+                    $r->the_post();
+                    $curr_post = $r->posts[$r->current_post];
+
+                    $title = get_the_title();
+
+                    $cws_stored_meta = get_post_meta( $curr_post->ID, 'cws-staff');
+                    $occupation = $cws_stored_meta[0]['cws-staff-degree'];
+                    $resume = $cws_stored_meta[0]['cws-staff-resume'];
+
+                    $thumbnail = has_post_thumbnail( $post->ID ) ? wp_get_attachment_image_src(get_post_thumbnail_id( $post->ID )) : null;
+                    $thumbnail = $thumbnail ? $thumbnail[0] : null;
+
+                    $arrayValue[]["name"] = $title;
+                    $index = count($arrayValue) - 1;
+                    $arrayValue[$index]["link"] = get_the_permalink();
+                    $arrayValue[$index]["occupation"] = $occupation;
+                    $arrayValue[$index]["resume"]= $resume;
+                    $arrayValue[$index]["image"] = $thumbnail;
+
                     if($i === 0){
 
                         $html .="<div class='vc_row wpb_row vc_inner vc_row-fluid'>";
                     }
                     $html .= "<div class='wpb_column vc_column_container vc_col-sm-4'>";
-                    $html .= "<div class=' phaet_card' onclick='phaet_our_team()'>";
-                    $r->the_post();
-                    $curr_post = $r->posts[$r->current_post];
-                    $cws_stored_meta = get_post_meta( $curr_post->ID, 'cws-staff');
+                    $html .= "<a href=". get_the_permalink()."><div class=' phaet_card' onclick='phaet_our_team()'>";
                     
-                    $occupation = $cws_stored_meta[0]['cws-staff-degree'];
-
-                    $thumbnail = has_post_thumbnail( $post->ID ) ? wp_get_attachment_image_src(get_post_thumbnail_id( $post->ID )) : null;
-                    $thumbnail = $thumbnail ? $thumbnail[0] : null;
+                    
+                    
+                    
                     $html .= $thumbnail ? "<img class='phaet_pic_card'src='$thumbnail'/> ": "";
                     
-                    $title = get_the_title();
                     $html .= "<div class='phaet_container'>";
                     $html .=  $title ? "<div style='".$style_title ."'>" . $title . "</div>" : "";
                     $html .=  $occupation ? "<div style='".$style_subtitle ."'>" . $occupation . "</div>" : "";
+                    //$html .=  $resume ? "<div style='".$style_subtitle ."'>" . $resume . "</div>" : "";
                     
-                    if(get_post() != ''){
-                         $html .=" <a href='" . get_the_permalink() . "' class='more'></a>";
-                    }
 
 
-                    $html .= "</div>";// <div class='container'>
-                    $html .= "</div>";// <div class='wpb_column vc_column_container vc_col-sm-3'>
+                    $html .= "</div> ";// <div class='container'>
+                    $html .= "</div></a>";// <div class='wpb_column vc_column_container vc_col-sm-3'>
                     $html .= "</div>"; //<div class='vc_column-inner '>
 
                     $i++;
@@ -162,12 +172,20 @@ class vcInfoBox extends WPBakeryShortCode {
             $html .= "</div>";
 
          }
-         
+
+        $html .=var_dump($arrayValue);
+        $html .= $arrayValue[0]["occupation"];
         return $html;
          
     } 
+
+    function printTeam($name, $image, $occupation, $resume, $link){
+        return $name . $image . $occupation . $resume . $link;
+    }
      
 } // End Element Class
  
+
+
 // Element Class Init
 new vcInfoBox(); 

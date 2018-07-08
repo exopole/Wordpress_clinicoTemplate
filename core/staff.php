@@ -637,6 +637,7 @@ function cws_mb_staff_callback ( $post ) {
 	$degree = isset( $cws_stored_meta['cws-staff-degree'] ) ? esc_attr( $cws_stored_meta['cws-staff-degree'] ) : '';
 	$office = isset( $cws_stored_meta['cws-staff-office'] ) ? esc_attr( $cws_stored_meta['cws-staff-office'] ) : '';
 	$tel = isset( $cws_stored_meta['cws-staff-telephone'] ) ? esc_attr( $cws_stored_meta['cws-staff-telephone'] ) : '';
+	$resume = isset( $cws_stored_meta['cws-staff-resume'] ) ? esc_attr( $cws_stored_meta['cws-staff-resume'] ) : '';
 	$workingdays = isset( $cws_stored_meta['cws-staff-workingdays'] ) ? $cws_stored_meta['cws-staff-workingdays'] : array();
 	$post_mb_staff_attr = array(
 		'staff'=>array(
@@ -646,6 +647,13 @@ function cws_mb_staff_callback ( $post ) {
 					'title' => __('Poste occupé',THEME_SLUG),
 					'type' => 'text',
 					'default' => $degree,
+					'w' => '100%'
+				),
+				array(
+					'id' => 'resume',
+					'title' => __('resume',THEME_SLUG),
+					'type' => 'text',
+					'default' => $resume,
 					'w' => '100%'
 				),
 /*				array(
@@ -672,7 +680,7 @@ function cws_mb_staff_callback ( $post ) {
 	echo '<section id="post-staff-general" class="cws-page-section">';
 	echo cws_shortcode_html_gen($post_mb_staff_attr, 'staff', 0, false, false, 'staff');
 	echo '</section>';
-	/*echo '<section class="cws-page-section">';
+/*	echo '<section class="cws-page-section">';
 	echo cws_shortcode_html_gen($post_tel_attr, 'telephone', 0, false, false, 'tel');
 	echo '</section>';
 	for ($i=0;$i < 5; $i++) {
