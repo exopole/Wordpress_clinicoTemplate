@@ -18,12 +18,20 @@
     text-align: center;
 }
 
+
 .phaet_pic_card{
 	width:100%;
 	margin-left:auto;
 	margin-right:auto;
 	display:block;
 }
+
+ .phaet_card:hover {
+background-color: #008fd5;
+color : white;
+cursor: pointer;
+}
+
 
 .phaet_subtitle{
 		color:#008fd5;  

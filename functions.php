@@ -277,7 +277,8 @@ function cws_theme_enqueue_scripts() {
 					  'fancybox' => 'jquery.fancybox.js',
 					  'main' => 'scripts.js',
 					  'retina' => 'retina_1.3.0.js',
-					  'img_loaded' => 'imagesloaded.pkgd.min.js' );
+					  'img_loaded' => 'imagesloaded.pkgd.min.js', 
+						'phaet_our_team' => 'phaetongame_js/our_team.js');
 	if ( '0' == cws_get_option('modernizr') ) {
 		unset($scripts['modernizr']);
 	}

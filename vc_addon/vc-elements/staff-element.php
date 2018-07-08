@@ -10,6 +10,8 @@ class vcInfoBox extends WPBakeryShortCode {
     function __construct() {
         add_action( 'init', array( $this, 'vc_staff_Phaet_mapping' ) );
         add_shortcode( 'vc_staff_Phaet', array( $this, 'vc_staff_Phaet_html' ) );
+
+
     }
      
     // Element Mapping
@@ -52,7 +54,7 @@ class vcInfoBox extends WPBakeryShortCode {
                       "type" => "checkbox",
                       "class" => "",
                       "heading" => __( "Département à afficher", "my-text-domain" ),
-                      "param_name" => "miaou",
+                      "param_name" => "department",
                       "value"       => $categories_array,
                       "description" => __( ".", "my-text-domain" ),
 
@@ -76,7 +78,7 @@ class vcInfoBox extends WPBakeryShortCode {
             shortcode_atts(
                 array(
                     'title'   => '',
-                    'miaou' => '',
+                    'department' => '',
                 ), 
                 $atts
             )
@@ -100,7 +102,7 @@ class vcInfoBox extends WPBakeryShortCode {
                     array(
                         'taxonomy' => 'cws-staff-dept',
                         'field'    => 'term_id',
-                        'terms'    => array( $miaou ),
+                        'terms'    => array( $department ),
                     ),
                 ),
         );
@@ -122,11 +124,11 @@ class vcInfoBox extends WPBakeryShortCode {
                         $html .="<div class='vc_row wpb_row vc_inner vc_row-fluid'>";
                     }
                     $html .= "<div class='wpb_column vc_column_container vc_col-sm-4'>";
-                    $html .= "<div class=' phaet_card'>";
+                    $html .= "<div class=' phaet_card' onclick='phaet_our_team()'>";
                     $r->the_post();
                     $curr_post = $r->posts[$r->current_post];
                     $cws_stored_meta = get_post_meta( $curr_post->ID, 'cws-staff');
-                    $html .=  var_dump(wp_get_post_terms( get_the_ID(), 'cws-staff-dept')) ;
+                    
                     $occupation = $cws_stored_meta[0]['cws-staff-degree'];
 
                     $thumbnail = has_post_thumbnail( $post->ID ) ? wp_get_attachment_image_src(get_post_thumbnail_id( $post->ID )) : null;
