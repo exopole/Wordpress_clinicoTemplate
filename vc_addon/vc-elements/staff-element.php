@@ -173,14 +173,38 @@ class vcInfoBox extends WPBakeryShortCode {
 
          }
 
-        $html .=var_dump($arrayValue);
-        $html .= $arrayValue[0]["occupation"];
+        // $html .=var_dump($arrayValue);
+         $html .='<div id="phaet_team">' ;
+         foreach ($arrayValue as $key => $value) {
+             $html.=$this->printTeam($value);
+         }
+         $html .='</div>';
         return $html;
          
     } 
 
-    function printTeam($name, $image, $occupation, $resume, $link){
-        return $name . $image . $occupation . $resume . $link;
+    public function coucou(){return "coucou";}
+    public function printTeam($informations){
+        $html = 
+        '
+        
+            <a href="'.$informations["link"] .'">
+                <div class="phaet_card">
+                    <img class="phaet_pic_card"src='.$informations["image"].' />
+                    <div class="phaet_container">
+                        <div style="font-weight: bold;font-size: large;">
+                            '.$informations["name"]  .'
+                        </div>
+                        <div style="font-style: italic">
+                            '.$informations["occupation"].'
+                        </div>
+                        
+                    </div>
+                </div>
+            </a>
+        '; 
+        //return $informations["name"] . $informations["image"] . $informations["occupation"] . $informations["resume"] . $informations["link"];
+        return $html;
     }
      
 } // End Element Class
