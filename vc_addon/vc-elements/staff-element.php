@@ -113,9 +113,7 @@ class vcInfoBox extends WPBakeryShortCode {
         $style_subtitle = "font-style: italic;";
         $arrayValue = array();
         if ($r->have_posts()){ 
-            $html .= "<div>";
             if ($r->have_posts()){
-                $i = 0;
                 while ($r->have_posts()):
                     $r->the_post();
                     $curr_post = $r->posts[$r->current_post];
@@ -136,40 +134,8 @@ class vcInfoBox extends WPBakeryShortCode {
                     $arrayValue[$index]["resume"]= $resume;
                     $arrayValue[$index]["image"] = $thumbnail;
 
-                    if($i === 0){
-
-                        $html .="<div class='vc_row wpb_row vc_inner vc_row-fluid'>";
-                    }
-                    $html .= "<div class='wpb_column vc_column_container vc_col-sm-4'>";
-                    $html .= "<a href=". get_the_permalink()."><div class=' phaet_card' onclick='phaet_our_team()'>";
-                    
-                    
-                    
-                    
-                    $html .= $thumbnail ? "<img class='phaet_pic_card'src='$thumbnail'/> ": "";
-                    
-                    $html .= "<div class='phaet_container'>";
-                    $html .=  $title ? "<div style='".$style_title ."'>" . $title . "</div>" : "";
-                    $html .=  $occupation ? "<div style='".$style_subtitle ."'>" . $occupation . "</div>" : "";
-                    //$html .=  $resume ? "<div style='".$style_subtitle ."'>" . $resume . "</div>" : "";
-                    
-
-
-                    $html .= "</div> ";// <div class='container'>
-                    $html .= "</div></a>";// <div class='wpb_column vc_column_container vc_col-sm-3'>
-                    $html .= "</div>"; //<div class='vc_column-inner '>
-
-                    $i++;
-                    if($i === 3){
-                        $i = 0;
-                        $html .= "</div>"; //<div class='vc_row wpb_row vc_inner vc_row-fluid'>
-                    }
                 endwhile;
             }
-            if($i !== 0){
-                $html .= "</div>"; //<div class='vc_row wpb_row vc_inner vc_row-fluid'>
-            }
-            $html .= "</div>";
 
          }
 
@@ -183,7 +149,6 @@ class vcInfoBox extends WPBakeryShortCode {
          
     } 
 
-    public function coucou(){return "coucou";}
     public function printTeam($informations){
         $html = 
         '
