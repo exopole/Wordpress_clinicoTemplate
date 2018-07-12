@@ -57,3 +57,8 @@ cursor: pointer;
 .page_footer{
 	border-top: #f35a21 solid;
 }
+
+.page-header > .container > .sticky_container{
+	width: 100% !important;
+	margin: 0 0 !important;
+}
